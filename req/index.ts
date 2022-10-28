@@ -1,31 +1,23 @@
 import request from '../lib/request';
 
-const weeksListUrl = 'https://weekly.zoo.team:3030/api/weeks/list';
+// const weeksListUrl = 'http://localhost:8888/api/posts';
+// const weeksListUrl = 'https://weekly.zoo.team:3030/api/weeks/list';
 const articlesCategoryUrl = 'https://weekly.zoo.team:3030/api/articles/category';
 const artsWeeks = 'https://weekly.zoo.team:3030/api/list';
 const catList = 'https://weekly.zoo.team:3030/api/categories/list';
 const overview = 'https://weekly.zoo.team:3030/api/summary/overview';
 
-type PostsWeekly = {
-    id: number;
-    title: string;
-    week: number;
-    count: number;
-    datetime: string;
-};
-
 export const getWeeksList = async () => {
-    const postsWeekly: PostsWeekly[] = await request(weeksListUrl);
-    return postsWeekly;
-};
-
-type Article = {
-    id: number;
-    title: string;
-    description: string;
-    link: string;
-    category: string;
-    timestamp: string;
+    // const postsWeekly: IPostsWeekly[] = await request(weeksListUrl);
+    return [
+        {
+            id: 1,
+            title: '第 xx 期',
+            week: 1,
+            count: 3,
+            datetime: '2022-10-24',
+        },
+    ];
 };
 
 /**
@@ -33,7 +25,7 @@ type Article = {
  * @param week
  */
 export const getArticlesByWeek = async (week: string) => {
-    const res: Article[] = await request(`${artsWeeks}?week=${week}`);
+    const res: IArticle[] = await request(`${artsWeeks}?week=${week}`);
     return res;
 };
 
@@ -42,41 +34,22 @@ export const getArticlesByWeek = async (week: string) => {
  * @param category
  */
 export const getArticlesByCategory = async (category: string) => {
-    const res: Article[] = await request(`${articlesCategoryUrl}?category=${category}`);
+    const res: IArticle[] = await request(`${articlesCategoryUrl}?category=${category}`);
     return res;
-};
-
-type Category = {
-    id: number;
-    name: string;
-    link: string;
-    description: string;
-    count: number;
-    parentid: number;
 };
 
 /**
  * 获取所有标签
  */
 export const getCategoriesList = async () => {
-    const res: Category[] = await request(catList);
+    const res: ICategory[] = await request(catList);
     return res;
-};
-
-type OverviewStats = {
-    articleTotal: { count: number }[];
-    categoryTotal: { count: number }[];
-    categoryMap: { category: string; count: number }[];
-    weekMap: { week: string; count: number }[];
-    monthMap: { month: string; count: number }[];
-    mostMan: { referrer: string; count: number }[];
-    curWeekMan: { referrer: string; count: number }[];
 };
 
 /**
  * 获取所有统计信息
  */
 export const getOverview = async () => {
-    const res: OverviewStats = await request(overview);
+    const res: IOverviewStats = await request(overview);
     return res;
 };

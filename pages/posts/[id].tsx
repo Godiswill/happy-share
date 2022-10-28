@@ -10,10 +10,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
         getWeeksList(),
         getCategoriesList(),
     ]);
-    // const arts = await (isCategory ? getArticlesByCategory : getArticlesByWeek)(query.id as string);
-    // const weekList = await getWeeksList();
-    // const cats = await getCategoriesList();
-    // console.log(arts);
+
     return {
         props: {
             arts,
